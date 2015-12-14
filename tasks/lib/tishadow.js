@@ -34,8 +34,14 @@ exports.init = function(grunt) {
                 break;
 
             case 'run':
+                // watch for changes
+                if (true === options.watch) {
+                  args.push("@");
+                }
+
                 // tishadow run
                 args.push('run');
+                
                 // -u, --update Only send recently changed files
                 if (true === options.update) {
                     args.push('-u');
@@ -72,6 +78,10 @@ exports.init = function(grunt) {
                 if (undefined !== options.room) {
                     args.push('-r', options.room);
                 }
+                // -f, --alloy-compile-file
+                if (undefined !== options.alloyCompileFile) {
+                    args.push('-f', options.alloyCompileFile);
+                }
                 // -s, --skip-alloy-compile
                 if (undefined !== options.skipAlloyCompile) {
                     args.push('-s');
@@ -79,8 +89,14 @@ exports.init = function(grunt) {
                 break;
 
             case 'spec':
+                // watch for changes
+                if (true === options.watch) {
+                  args.push("@");
+                }
+
                 // tishadow spec
                 args.push('spec');
+
                 // -u, --update Only send recently changed files
                 if (true === options.update) {
                     args.push('-u');
@@ -110,7 +126,7 @@ exports.init = function(grunt) {
                     args.push('-j');
                 }
                 // -t, --type analyse code with JSHint
-                if (undefined === options.type) {
+                if (undefined !== options.type) {
                     args.push('-t', options.type);
                 }
                 // -x, --junit-xml output report as JUnit XML
